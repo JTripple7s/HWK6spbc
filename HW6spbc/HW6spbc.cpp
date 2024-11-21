@@ -3,6 +3,21 @@
 
 #include "HW6spbc.h"
 
+void scanFile(string filename) {
+	ifstream inputFile(filename);
+
+	if (!inputFile) {
+		cerr << "Unable to open file " << endl;
+		exit(1);
+	}
+
+	string line;
+	while (getline(inputFile, line)) {
+		cout << line << endl;
+	}
+	inputFile.close();
+}
+
 int main()
 {
 	auto now = chrono::system_clock::now();
@@ -27,17 +42,4 @@ int main()
 	return 0;
 }
 
-void scanFile(string filename) {
-	ifstream inputFile(filename);
 
-	if (!inputFile) {
-		cerr << "Unable to open file " << endl;
-		exit(1);
-	}
-
-	string line;
-	while (getline(inputFile, line)) {
-		cout << line << endl;
-	}
-	inputFile.close();
-}

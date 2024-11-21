@@ -1,9 +1,8 @@
-﻿// HW6spbc.cpp : Defines the entry point for the application.
-//
-
+﻿
 #include "HW6spbc.h"
 
-void scanCityFile(string filename, unordered_map<string, City>& cities) {
+
+void scanCityFile(const string& filename, GraphCities& graph) {
 	ifstream inputFile(filename);
 
 	if (!inputFile) {
@@ -18,13 +17,12 @@ void scanCityFile(string filename, unordered_map<string, City>& cities) {
 		string cityCode, CityName;
 
 		ss >> ID >> cityCode >> CityName >> Population >> Elevation;
-		City city(ID, cityCode, CityName, Population, Elevation);
-		cities[cityCode] = city;
+		graph.addCity(ID, cityCode, CityName, Population, Elevation);
 	}
 	inputFile.close();
 }
 
-void scanRoadsFile(const string& filename, GraphCities& graph, const unordered_map<string, City>& cities) {
+void scanRoadsFile(const string& filename, GraphCities& graph) {
 	ifstream inputFile(filename);
 	if (!inputFile) {
 		cerr << "Unable to open file" << endl;
@@ -40,14 +38,13 @@ void scanRoadsFile(const string& filename, GraphCities& graph, const unordered_m
 
 		ss >> fromCity >> toCity >> distance;
 
-		graph.addEdge(fromCity, toCity, distance);
+		graph.addRoad(stoi(fromCity), stoi(toCity), distance);
 	}
 	inputFile.close();
 }
 
 int main()
 {
-	unordered_map<string, City> cities;
 	GraphCities graph;
 	auto now = chrono::system_clock::now();
 	time_t currentTime = chrono::system_clock::to_time_t(now);
@@ -64,8 +61,8 @@ int main()
 	cout << "Description: Program to find the shortest route between cities" << endl;
 	cout << "---------------------------------------------------------------" << endl;
 
-	scanCityFile("city.txt", cities);
-	scanRoadsFile("road.txt", graph, cities);
+	scanCityFile("city.txt", graph);
+	scanRoadsFile("road.txt", graph);
 
 	graph.displayGraph();
 

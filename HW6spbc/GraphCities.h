@@ -1,16 +1,34 @@
 #pragma once
 #include<vector>
-#include<unordered_map>
 #include<list>
 #include<string>
 
 using namespace std;
 
+struct City {
+	int ID;
+	string cityCode;
+	string cityName;
+	int Population;
+	int Elevation;
+
+	vector<pair<int, int>> neighbors;
+
+	City(int id, const string& code, const string& name, int population, int elevation) {
+		ID = id;
+		cityCode = code;
+		cityName = name;
+		Population = population;
+		Elevation = elevation;
+	}
+};
+
 class GraphCities {
 private:
-	unordered_map<string, list<pair<string, int>>> adjList;
+	vector<City> cities;
 
 public:
-	void addEdge(const string& fromCity, const string& toCity, int distance);
-	void displayGraph();
+	void addCity(int id, const string& code, const string& name, int population, int elevation);
+	void addRoad(int fromCity, int toCity, int distance);
+	void displayGraph() const;
 };

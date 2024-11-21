@@ -2,11 +2,6 @@
 //
 
 #include "HW6spbc.h"
-#include <iostream>
-#include <chrono>
-#include <iomanip>
-
-using namespace std;
 
 int main()
 {
@@ -25,5 +20,24 @@ int main()
 	cout << "Description: Program to find the shortest route between cities" << endl;
 	cout << "---------------------------------------------------------------" << endl;
 
+	scanFile("city.txt");
+	cout << "---------------------------------------------------------------" << endl;
+	scanFile("road.txt");
+
 	return 0;
+}
+
+void scanFile(string filename) {
+	ifstream inputFile(filename);
+
+	if (!inputFile) {
+		cerr << "Unable to open file " << endl;
+		exit(1);
+	}
+
+	string line;
+	while (getline(inputFile, line)) {
+		cout << line << endl;
+	}
+	inputFile.close();
 }

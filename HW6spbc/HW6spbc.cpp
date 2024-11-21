@@ -3,22 +3,6 @@
 
 #include "HW6spbc.h"
 
-struct City {
-	int ID;
-	string cityCode;
-	string cityName;
-	int Population;
-	int Elevation;
-
-	City(int id, string& code, string& name, int population, int elevation) {
-		ID = id;
-		cityCode = code;
-		cityName = name;
-		Population = population;
-		Elevation = elevation;
-	}
-};
-
 void scanCityFile(string filename, unordered_map<string, City>& cities) {
 	ifstream inputFile(filename);
 
@@ -56,12 +40,7 @@ void scanRoadsFile(const string& filename, GraphCities& graph, const unordered_m
 
 		ss >> fromCity >> toCity >> distance;
 
-		if (cities.find(fromCity) != cities.end() && cities.find(toCity) != cities.end()) {
-			graph.addEdge(fromCity, toCity, distance);
-		}
-		else {
-			cerr << "City not found" << endl;
-		}
+		graph.addEdge(fromCity, toCity, distance);
 	}
 	inputFile.close();
 }
@@ -87,6 +66,8 @@ int main()
 
 	scanCityFile("city.txt", cities);
 	scanRoadsFile("road.txt", graph, cities);
+
+	graph.displayGraph();
 
 	return 0;
 }

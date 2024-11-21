@@ -10,7 +10,7 @@ struct City {
 	int Population;
 	int Elevation;
 
-	City(int id, string code, string name, int population, int elevation) {
+	City(int id, string& code, string& name, int population, int elevation) {
 		ID = id;
 		cityCode = code;
 		cityName = name;
@@ -19,7 +19,7 @@ struct City {
 	}
 };
 
-void scanFile(string filename) {
+void scanCityFile(string filename, unordered_map<string, City>& cities) {
 	ifstream inputFile(filename);
 
 	if (!inputFile) {
@@ -29,13 +29,47 @@ void scanFile(string filename) {
 
 	string line;
 	while (getline(inputFile, line)) {
-		cout << line << endl;
+		stringstream ss(line);
+		int ID, Population, Elevation;
+		string cityCode, CityName;
+
+		ss >> ID >> cityCode >> CityName >> Population >> Elevation;
+		City city(ID, cityCode, CityName, Population, Elevation);
+		cities[cityCode] = city;
+	}
+	inputFile.close();
+}
+
+void scanRoadsFile(const string& filename, GraphCities& graph, const unordered_map<string, City>& cities) {
+	ifstream inputFile(filename);
+	if (!inputFile) {
+		cerr << "Unable to open file" << endl;
+		exit(1);
+	}
+
+	string line;
+	while (getline(inputFile, line)) {
+		string fromCity, toCity;
+		int distance;
+
+		stringstream ss(line);
+
+		ss >> fromCity >> toCity >> distance;
+
+		if (cities.find(fromCity) != cities.end() && cities.find(toCity) != cities.end()) {
+			graph.addEdge(fromCity, toCity, distance);
+		}
+		else {
+			cerr << "City not found" << endl;
+		}
 	}
 	inputFile.close();
 }
 
 int main()
 {
+	unordered_map<string, City> cities;
+	GraphCities graph;
 	auto now = chrono::system_clock::now();
 	time_t currentTime = chrono::system_clock::to_time_t(now);
 	tm localTime;
@@ -51,9 +85,8 @@ int main()
 	cout << "Description: Program to find the shortest route between cities" << endl;
 	cout << "---------------------------------------------------------------" << endl;
 
-	scanFile("city.txt");
-	cout << "---------------------------------------------------------------" << endl;
-	scanFile("road.txt");
+	scanCityFile("city.txt", cities);
+	scanRoadsFile("road.txt", graph, cities);
 
 	return 0;
 }

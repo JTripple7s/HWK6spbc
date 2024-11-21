@@ -3,6 +3,22 @@
 
 #include "HW6spbc.h"
 
+struct City {
+	int ID;
+	string cityCode;
+	string cityName;
+	int Population;
+	int Elevation;
+
+	City(int id, string code, string name, int population, int elevation) {
+		ID = id;
+		cityCode = code;
+		cityName = name;
+		Population = population;
+		Elevation = elevation;
+	}
+};
+
 void scanFile(string filename) {
 	ifstream inputFile(filename);
 

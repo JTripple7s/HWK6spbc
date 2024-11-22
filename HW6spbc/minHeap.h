@@ -131,5 +131,5 @@ public:
    * @return int return -1 if the heap is empty, otherwise return the max value
    * in the heap
    */
-  int getmin() const;
+  int getMin() const;
 };

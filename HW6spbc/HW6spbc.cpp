@@ -66,7 +66,11 @@ int main()
 
 	graph.displayGraph();
 	
-	
+	/*Heap* something = new Heap;
+	for (int i = 20; i > 0; i--)
+		something->insert(i);
+	something->printHeap();*/
+
 
 	return 0;
 }

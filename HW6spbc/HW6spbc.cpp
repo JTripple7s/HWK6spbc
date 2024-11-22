@@ -1,4 +1,4 @@
-﻿
+﻿#include "minHeap.h"
 #include "HW6spbc.h"
 
 
@@ -6,7 +6,7 @@ void scanCityFile(const string& filename, GraphCities& graph) {
 	ifstream inputFile(filename);
 
 	if (!inputFile) {
-		cerr << "Unable to open file " << endl;
+		cerr << "Unable to open city.txt file " << endl;
 		exit(1);
 	}
 
@@ -25,7 +25,7 @@ void scanCityFile(const string& filename, GraphCities& graph) {
 void scanRoadsFile(const string& filename, GraphCities& graph) {
 	ifstream inputFile(filename);
 	if (!inputFile) {
-		cerr << "Unable to open file" << endl;
+		cerr << "Unable to open roads.txt file" << endl;
 		exit(1);
 	}
 
@@ -62,9 +62,11 @@ int main()
 	cout << "---------------------------------------------------------------" << endl;
 
 	scanCityFile("city.txt", graph);
-	scanRoadsFile("road.txt", graph);
+	scanRoadsFile("roads.txt", graph);
 
 	graph.displayGraph();
+	
+	
 
 	return 0;
 }

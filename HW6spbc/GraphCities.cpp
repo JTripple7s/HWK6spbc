@@ -27,49 +27,10 @@ void GraphCities::printDistances(vector<int>& distances) const {
 		}
 	}
 }
-vector<int> GraphCities::dijkstraSP(GraphCities& graph, City& city) {
-	/*
-	vector<int> distance, vector<City> unvisitedSet;
-	vector<City> tempVec = graph.getCities();
-	distance.push_back(cityID.ID);
-
-
-	for (int i = 0; i < graph.getCities().size(); i++) {
-		if (tempVec[i].ID != cityID.ID) {
-			distance[i] = INT_MAX;
-			unvisitedSet.push_back(tempVec[i]);
-		}
-
-		while (!unvisitedSet.empty()) {
-			City smallest = unvisitedSet[0];
-			for (int i = 0; i < unvisitedSet.size(); i++) {
-				if (unvisitedSet[i] < smallest) {
-					smallest = unvisitedSet[i];
-				}
-
-			}
-			int path = smallest;
-			for (int i = 0; i < unvisitedSet.size(); i++) {
-				if (unvisitedSet[i] == smallest) {
-					unvisitedSet.erase(unvisitedSet.begin() + i);
-				}
-				else {
-					cerr << "Error in dijkstra algorithm" << endl;
-					exit(1);
-				}
-			}
-			for(int i = 0; i < tempVec[])
-		}
-	}
-	*/
-	vector<int> dist;	//distance vector
+void GraphCities::dijkstraSP(GraphCities& graph, int city) {
+	vector<int> dist(cities.size(), INT_MAX);
 	vector<int> unvisitedSet;
-	dist[city.ID] = 0;
-	for (int i = 0; i < cities.size(); i++) {
-		if (cities[i].ID != city.ID) {
-			dist[cities[i].ID] = INT_MAX;
-		}
-	}
+	dist[city] = 0;
 	for (const auto& city : cities) {
 		unvisitedSet.push_back(city.ID);
 	}
@@ -102,9 +63,17 @@ vector<int> GraphCities::dijkstraSP(GraphCities& graph, City& city) {
 		}
 
 	}
-	return dist;
-
+	//return dist;
+	for (int i = 0; i < dist.size(); ++i) {
+		if (dist[i] == INT_MAX) {
+			cout << "Not all cities are connected my road" << endl;
+		}
+		else {
+			cout << "Distance to City " << cities[i].cityName << " (" << cities[i].cityCode << "): " << dist[i] << "\n";
+		}
+	}
 }
+	
 City& GraphCities::getCity(int index) {
 	return cities[index];
 }

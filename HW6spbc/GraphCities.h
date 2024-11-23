@@ -33,6 +33,6 @@ public:
 	void addRoad(int fromCity, int toCity, int distance);
 	void displayGraph() const;
 	void printDistances(vector<int>& distances) const;
-	vector<int> dijkstraSP(GraphCities& graph, City& city);
+	void dijkstraSP(GraphCities& graph, int city);
 	City& getCity(int index);
 };

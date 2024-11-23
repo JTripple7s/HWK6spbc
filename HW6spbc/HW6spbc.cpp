@@ -64,9 +64,10 @@ int main()
 	scanCityFile("city.txt", graph);
 	scanRoadsFile("roads.txt", graph);
 
-	graph.displayGraph();
+	//graph.displayGraph();
 	City city = graph.getCity(0);
-	graph.dijkstraSP(graph, city);
+	graph.dijkstraSP(graph, 0);
+	cout << "we made it";
 	
 	/*Heap* something = new Heap;
 	for (int i = 20; i > 0; i--)

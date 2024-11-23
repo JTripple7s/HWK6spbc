@@ -23,7 +23,7 @@ void GraphCities::printDistances(vector<int>& distances) const {
 			cout << "Not all cities are connected my road" << endl;
 		}
 		else {
-			cout << "Distance to City " << cities[i].cityName << " (" << cities[i].cityCode << "): " << distances[i] << "\n";
+			cout << "Distance to City " << cities[i].cityName << " (" << cities[i].cityCode << "): " << distances[i] << endl;
 		}
 	}
 }
@@ -69,7 +69,7 @@ void GraphCities::dijkstraSP(GraphCities& graph, int city) {
 			cout << "Not all cities are connected my road" << endl;
 		}
 		else {
-			cout << "Distance to City " << cities[i].cityName << " (" << cities[i].cityCode << "): " << dist[i] << "\n";
+			cout << "Distance from " << cities[city].cityName << " to -> " << cities[i].cityName << " (" << cities[i].cityCode << ") : " << dist[i] << endl;
 		}
 	}
 }

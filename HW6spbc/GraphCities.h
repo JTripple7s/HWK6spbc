@@ -1,6 +1,7 @@
 #pragma once
 #include<vector>
 #include<list>
+#include <climits>
 #include<string>
 
 using namespace std;
@@ -31,5 +32,7 @@ public:
 	void addCity(int id, const string& code, const string& name, int population, int elevation);
 	void addRoad(int fromCity, int toCity, int distance);
 	void displayGraph() const;
-	vector<City> getCities();
+	void printDistances(vector<int>& distances) const;
+	vector<int> dijkstraSP(GraphCities& graph, City& city);
+	City& getCity(int index);
 };

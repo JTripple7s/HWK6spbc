@@ -43,6 +43,30 @@ void scanRoadsFile(const string& filename, GraphCities& graph) {
 	inputFile.close();
 }
 
+int dijkstraSP(GraphCities& graph, City& cityID) {
+	vector<int> distance, vector<int> unvisitedSet;
+	vector<City> tempVec = graph.getCities();
+	distance.push_back(cityID.ID);
+
+
+	for (int i = 0; i < graph.getCities().size(); i++) {
+		if (tempVec[i].ID != 0) {
+			distance[i] = INT_MAX;
+			unvisitedSet.push_back(i);
+		}
+
+		while (!unvisitedSet.empty()) {
+			int smallest = unvisitedSet[0];
+			for (int i = 0; i < unvisitedSet.size(); i++) {
+				if (unvisitedSet[i] < smallest) {
+					smallest = unvisitedSet[i];
+				}
+			}
+			int path = smallest;
+		}
+	}
+}
+
 int main()
 {
 	GraphCities graph;

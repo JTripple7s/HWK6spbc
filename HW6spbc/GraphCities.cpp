@@ -17,3 +17,7 @@ void GraphCities::displayGraph() const {
 		cout << endl;
 	}
 }
+
+vector<City> GraphCities::getCities() {
+	return this->cities;
+}

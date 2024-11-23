@@ -31,4 +31,5 @@ public:
 	void addCity(int id, const string& code, const string& name, int population, int elevation);
 	void addRoad(int fromCity, int toCity, int distance);
 	void displayGraph() const;
+	vector<City> getCities();
 };

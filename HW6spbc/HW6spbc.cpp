@@ -43,28 +43,75 @@ void scanRoadsFile(const string& filename, GraphCities& graph) {
 	inputFile.close();
 }
 
-int dijkstraSP(GraphCities& graph, City& cityID) {
-	vector<int> distance, vector<int> unvisitedSet;
-	vector<City> tempVec = graph.getCities();
+int dijkstraSP(GraphCities& graph, City& city) {
+	/*
+	vector<int> distance, vector<City> unvisitedSet;		
+	vector<City> tempVec = graph.getCities();			
 	distance.push_back(cityID.ID);
 
 
-	for (int i = 0; i < graph.getCities().size(); i++) {
-		if (tempVec[i].ID != 0) {
+	for (int i = 0; i < graph.getCities().size(); i++) {	
+		if (tempVec[i].ID != cityID.ID) {
 			distance[i] = INT_MAX;
-			unvisitedSet.push_back(i);
+			unvisitedSet.push_back(tempVec[i]);
 		}
 
-		while (!unvisitedSet.empty()) {
-			int smallest = unvisitedSet[0];
+		while (!unvisitedSet.empty()) {		
+			City smallest = unvisitedSet[0];
 			for (int i = 0; i < unvisitedSet.size(); i++) {
 				if (unvisitedSet[i] < smallest) {
 					smallest = unvisitedSet[i];
 				}
+
 			}
-			int path = smallest;
+			int path = smallest; 
+			for (int i = 0; i < unvisitedSet.size(); i++) {
+				if (unvisitedSet[i] == smallest) {
+					unvisitedSet.erase(unvisitedSet.begin() + i);	
+				}
+				else {
+					cerr << "Error in dijkstra algorithm" << endl;
+					exit(1);
+				}
+			}
+			for(int i = 0; i < tempVec[])
 		}
 	}
+	*/
+	vector<int> distance, vector<int> unvisitedSet;
+	vector<City> tempVec = graph.getCities();
+	distance[city.ID] = 0;
+	for (int i = 0; i < tempVec.size(); i++) {
+		if (tempVec[i].ID != city.ID) {
+			distance[tempVec[i].ID] = INT_MAX;
+		}
+	}
+	for (const auto& city : tempVec) {
+		unvisitedSet.push_back(city.ID);
+	}
+	while (!unvisitedSet.empty()) {
+		int minDist = INT_MAX;
+		int smallestIndex = -1;
+		for (int i = 0; i < unvisitedSet.size(); ++i) {
+			int smallestID = unvisitedSet[i];
+			if (distance[smallestID] < minDist) {
+				minDist = distance[smallestID];
+				smallestIndex = i;
+			}
+		}
+		if (minDist == INT_MAX) {
+			break;
+		}
+		int smallestID = unvisitedSet[smallestIndex];
+		unvisitedSet.erase(unvisitedSet.begin() + smallestIndex);
+
+		for (const auto& neighbor : tempVec[smallestID].neighbors) {
+			int neighborID = neighbor.first;
+			int distance = neighbor.second;
+		}
+	}
+
+	
 }
 
 int main()

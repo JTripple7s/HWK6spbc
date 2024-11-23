@@ -13,4 +13,4 @@ using namespace std;
 
 void scanCityFile(const string& filename, GraphCities& graph);
 void scanRoadsFile(const string& filename, GraphCities& graph);
-int dijkstraSP(GraphCities& graph, City& cityID);
+int dijkstraSP(GraphCities& graph, City& city);

@@ -43,8 +43,10 @@ void scanRoadsFile(const string& filename, GraphCities& graph) {
 	inputFile.close();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+	string fromCity = argv[0];
+	string toCity = argv[0];
 	GraphCities graph;
 	auto now = chrono::system_clock::now();
 	time_t currentTime = chrono::system_clock::to_time_t(now);
@@ -70,7 +72,9 @@ int main()
 	graph.printDistances();
 
 	cout << "---------------------------------------------------------------" << endl;
-	cout << "we made it";
+	cout << "we made it" << endl;
+	
+	cout << argc << "\n" << fromCity << " " << toCity << endl;
 
 	return 0;
 }

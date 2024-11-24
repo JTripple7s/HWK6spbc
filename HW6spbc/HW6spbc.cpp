@@ -54,13 +54,9 @@ void scanRoadsFile(const string& filename, GraphCities& graph) {
 * based on user computer date and time data
 */
 void headerOut() {
-	auto now = chrono::system_clock::now();
-	time_t currentTime = chrono::system_clock::to_time_t(now);
-	tm localTime;
-	localtime_s(&localTime, &currentTime);
 
 	cout << "Author: Joel Burlingame and Paul Sihavong" << endl;
-	cout << "Date:" << put_time(&localTime, "%m/%d/%Y") << endl;
+	cout << "Date: 11/24/2024"<< endl;
 	cout << "Course: CS311 (Data structures and Algorithms)" << endl;
 	cout << "Description: Program to find the shortest route between cities" << endl;
 	cout << "---------------------------------------------------------------" << endl;
@@ -81,6 +77,7 @@ int main(int argc, char* argv[])
 		cout << "this is a test\n";
 		headerOut();
 		graph.dijkstraSP(argv[1]);
+		graph.printDistanceFromTo(argv[2]);
 	}
 	else {
 		headerOut();

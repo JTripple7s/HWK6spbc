@@ -3,6 +3,7 @@
 #include<list>
 #include <climits>
 #include<string>
+#include<algorithm>
 
 using namespace std;
 

@@ -17,13 +17,13 @@ void GraphCities::displayGraph() const {
 		cout << endl;
 	}
 }
-void GraphCities::printDistances(vector<int>& distances) const {
-	for (int i = 0; i < distances.size(); ++i) {
-		if (distances[i] == INT_MAX) {
+void GraphCities::printDistances() const {
+	for (int i = 0; i < route.size(); ++i) {
+		if (route[i] == INT_MAX) {
 			cout << "Not all cities are connected my road" << endl;
 		}
 		else {
-			cout << "Distance to City " << cities[i].cityName << " (" << cities[i].cityCode << "): " << distances[i] << endl;
+			cout << "Distance from " << cities[source].cityName << " to -> " << cities[i].cityName << " (" << cities[i].cityCode << ") : " << route[i] << endl;
 		}
 	}
 }
@@ -62,7 +62,9 @@ void GraphCities::dijkstraSP(GraphCities& graph, int city) {
 			}
 		}
 	}
-	//return dist;
+	route = dist;
+	source = city;
+	/*
 	for (int i = 0; i < dist.size(); ++i) {
 		if (dist[i] == INT_MAX) {
 			cout << "Not all cities are connected my road" << endl;
@@ -71,6 +73,8 @@ void GraphCities::dijkstraSP(GraphCities& graph, int city) {
 			cout << "Distance from " << cities[city].cityName << " to -> " << cities[i].cityName << " (" << cities[i].cityCode << ") : " << dist[i] << endl;
 		}
 	}
+	*/
+	
 }
 	
 City& GraphCities::getCity(int index) {

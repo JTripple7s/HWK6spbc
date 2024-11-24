@@ -27,12 +27,14 @@ struct City {
 class GraphCities {
 private:
 	vector<City> cities;
+	vector<int> route;
+	int source;
 
 public:
 	void addCity(int id, const string& code, const string& name, int population, int elevation);
 	void addRoad(int fromCity, int toCity, int distance);
 	void displayGraph() const;
-	void printDistances(vector<int>& distances) const;
+	void printDistances() const;
 	void dijkstraSP(GraphCities& graph, int city);
 	City& getCity(int index);
 };

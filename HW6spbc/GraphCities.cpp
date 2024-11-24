@@ -42,13 +42,24 @@ void GraphCities::printDistances() const {
 		}
 	}
 }
-void GraphCities::printDistanceFromTo(int destinationC) const {
+void GraphCities::printDistanceFromTo(string destinationC) const {
+	int toCitytoInt = -1;
+	for (int i = 0; i < cities.size(); i++) {
+		if (destinationC == cities[i].cityCode) {
+			toCitytoInt = cities[i].ID;
+			break;
+		}
+	}
+	if (toCitytoInt == -1) {
+		cout << "The destination city does not exist within the graph" << endl;
+		exit(1);
+	}
 	cout << "From City: " << cities[sourceCity].cityName << ", population " << cities[sourceCity].Population << ", elevation " << cities[sourceCity].Elevation << endl;
-	cout << "To City: " << cities[destinationC].cityName << ", population " << cities[destinationC].Population << ", elevation " << cities[destinationC].Elevation << endl;
-	cout << "Shortest distance from " << cities[sourceCity].cityName << " to " << cities[destinationC].cityName << " is " << route[destinationC] << endl;
+	cout << "To City: " << cities[toCitytoInt].cityName << ", population " << cities[toCitytoInt].Population << ", elevation " << cities[toCitytoInt].Elevation << endl;
+	cout << "Shortest distance from " << cities[sourceCity].cityName << " to " << cities[toCitytoInt].cityName << " is " << route[toCitytoInt] << endl;
 	cout << "Through the route: ";
 	vector<int> travel;
-	for (int i = cities[destinationC].ID; i != -1; i = predecessorCity[i]) {
+	for (int i = cities[toCitytoInt].ID; i != -1; i = predecessorCity[i]) {
 		travel.push_back(i);
 	}
 	reverse(travel.begin(), travel.end());
@@ -63,11 +74,23 @@ void GraphCities::printDistanceFromTo(int destinationC) const {
 * code is based of psudo code prived from handout as well as addition psudo code found online
 * agruments consist of the source city
 */
-void GraphCities::dijkstraSP(int fromCity) {
+void GraphCities::dijkstraSP(const string& fromCity) {
 	vector<int> dist(cities.size(), INT_MAX);
 	vector<int>predecessor(cities.size(), -1);
 	vector<int> unvisitedSet;
-	dist[fromCity] = 0;
+	int fromCityToInt = -1;
+	//cout << fromCity << " " << cities[0].cityCode;
+	for (int i = 0; i < cities.size(); i++) {
+		if (fromCity == cities[i].cityCode) {
+			fromCityToInt = cities[i].ID;
+			break;
+		}
+	}
+	if (fromCityToInt == -1) {
+		cout << "The source city does not exist within the graph" << endl;
+		exit(1);
+	}
+	dist[fromCityToInt] = 0;
 	for (const auto& city : cities) {
 		unvisitedSet.push_back(city.ID);
 	}
@@ -96,12 +119,11 @@ void GraphCities::dijkstraSP(int fromCity) {
 				if (alt < dist[neighborID]) {
 					dist[neighborID] = alt;
 					predecessor[neighborID] = smallestID;
-
 				}
 			}
 		}
 	}
 	this->route = dist;
-	this->sourceCity = fromCity;
+	this->sourceCity = fromCityToInt;
 	this->predecessorCity = predecessor;
 }

@@ -68,37 +68,38 @@ void headerOut() {
 
 int main(int argc, char* argv[])
 {
-	//string s1 = argv[1];
 
 	GraphCities graph;
+	scanCityFile("city.txt", graph);
+	scanRoadsFile("roads.txt", graph);
 	/*
 	* This if statement checks if there is any arguments sent in with exe(sssp)
-	* if there is it will find the shortest path between the two cities that was 
+	* if there is it will find the shortest path between the two cities that was
 	* sent in if they exist within the graph
 	*/
 	if (argv[1] != nullptr) {
 		cout << "this is a test\n";
+		headerOut();
+		graph.dijkstraSP(argv[1]);
 	}
-	headerOut();
-	scanCityFile("city.txt", graph);
-	scanRoadsFile("roads.txt", graph);
+	else {
+		headerOut();
+		//graph.displayGraph();
+		//cout << "---------------------------------------------------------------" << endl;
+		graph.dijkstraSP("AN");
+		graph.printDistanceFromTo("BK");
+		//graph.printDistances();
 
-	//graph.displayGraph();
-	//cout << "---------------------------------------------------------------" << endl;
-	graph.dijkstraSP(0);
-	graph.printDistanceFromTo(1);
-	//graph.printDistances();
-
-	//cout << "---------------------------------------------------------------" << endl;
-	/*
-	* exe will always have at least one argument passed through being the exe itself
-	* multiple agrs can be passed and stored into argv array
-	*/
-	//cout << "number of arguments passed with executeble: " << argc << endl;	
-	//cout << "test1";
-	//cout << s1 << endl;
-	cout << "\n";
-
+		//cout << "---------------------------------------------------------------" << endl;
+		/*
+		* exe will always have at least one argument passed through being the exe itself
+		* multiple agrs can be passed and stored into argv array
+		*/
+		//cout << "number of arguments passed with executeble: " << argc << endl;	
+		//cout << "test1";
+		//cout << s1 << endl;
+		cout << "\n";
+	}
 	return 0;
 }
 

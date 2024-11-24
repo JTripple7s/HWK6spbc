@@ -1,7 +1,10 @@
 ﻿#include "minHeap.h"
 #include "HW6spbc.h"
 
-
+/*
+* Scan function that reads city.txt and stores them to graph -> city vector
+* arguments consist of name of file to be read and the graph object
+*/
 void scanCityFile(const string& filename, GraphCities& graph) {
 	ifstream inputFile(filename);
 
@@ -12,7 +15,7 @@ void scanCityFile(const string& filename, GraphCities& graph) {
 
 	string line;
 	while (getline(inputFile, line)) {
-		stringstream ss(line);
+		stringstream ss(line);	//stringstream stores the data from txt into var
 		int ID, Population, Elevation;
 		string cityCode, CityName;
 
@@ -21,7 +24,10 @@ void scanCityFile(const string& filename, GraphCities& graph) {
 	}
 	inputFile.close();
 }
-
+/*
+* Scan function that reads road.txt and stores them to graph -> cities struct -> pair object
+* arguments consist of name of file to be read and the graph object
+*/
 void scanRoadsFile(const string& filename, GraphCities& graph) {
 	ifstream inputFile(filename);
 	if (!inputFile) {
@@ -34,7 +40,7 @@ void scanRoadsFile(const string& filename, GraphCities& graph) {
 		string fromCity, toCity;
 		int distance;
 
-		stringstream ss(line);
+		stringstream ss(line);	//stringstream stores the data from txt into var
 
 		ss >> fromCity >> toCity >> distance;
 
@@ -42,6 +48,11 @@ void scanRoadsFile(const string& filename, GraphCities& graph) {
 	}
 	inputFile.close();
 }
+/*
+* Displays the header of the output to console
+* imported ctime and chrono to utilize the accurate display of the date 
+* based on user computer date and time data
+*/
 void headerOut() {
 	auto now = chrono::system_clock::now();
 	time_t currentTime = chrono::system_clock::to_time_t(now);
@@ -70,15 +81,17 @@ int main(int argc, char* argv[])
 
 	graph.displayGraph();
 	cout << "---------------------------------------------------------------" << endl;
-	graph.dijkstraSP(graph, 0);
+	graph.dijkstraSP(0);
 	graph.printDistances();
 
 	cout << "---------------------------------------------------------------" << endl;
-	cout << "we made it" << endl;
-	cout << argc << endl;
+	/*
+	* exe will always have at least one argument passed through being the exe itself
+	* multiple agrs can be passed and stored into argv array
+	*/
+	cout << "number of arguments passed with executeble: " << argc << endl;	
+	cout << "test1";
 	//cout << s1 << endl;
-	//printf("%s", argv[1]);
-
 
 	return 0;
 }

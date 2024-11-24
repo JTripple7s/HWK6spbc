@@ -35,6 +35,5 @@ public:
 	void addRoad(int fromCity, int toCity, int distance);
 	void displayGraph() const;
 	void printDistances() const;
-	void dijkstraSP(GraphCities& graph, int city);
-	City& getCity(int index);
+	void dijkstraSP(int city);
 };

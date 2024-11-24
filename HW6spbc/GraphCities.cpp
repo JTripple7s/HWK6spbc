@@ -1,13 +1,24 @@
 #include"GraphCities.h"
 #include <iostream>
 using namespace std;
-
+/*
+* addCity takes data from scanner and adds them to a cities object vector
+* arguments consist of data to be applied to the City object within the city vector
+*/
 void GraphCities::addCity(int id, const string& code, const string& name, int population, int elevation) {
 	cities.emplace_back(id, code, name, population, elevation);
 }
+/*
+* addRoad takes data from scanner and adds them to a cities object pair class
+* arguments consist of source city from which the distance and destination city data will be put 
+* in pair linking that city object with its neighboring city and the distance to that city
+*/
 void GraphCities::addRoad(int fromCity, int toCity, int distance) {
 	cities[fromCity].neighbors.push_back({ toCity, distance });
 }
+/*
+* displayGraph will display the contents of the entire graph and the edges(roads) between nodes(cities)
+*/
 void GraphCities::displayGraph() const {
 	for (const auto& city : cities) {
 		cout << "FromCity: " << city.cityName << ", population " << city.Population << ", elevation " << city.Elevation << endl;
@@ -17,6 +28,10 @@ void GraphCities::displayGraph() const {
 		cout << endl;
 	}
 }
+/*
+* printDistances will display the contents of route vector
+* source city will be displayed followed by the shortest path between all connected cities
+*/
 void GraphCities::printDistances() const {
 	for (int i = 0; i < route.size(); ++i) {
 		if (route[i] == INT_MAX) {
@@ -27,7 +42,13 @@ void GraphCities::printDistances() const {
 		}
 	}
 }
-void GraphCities::dijkstraSP(GraphCities& graph, int city) {
+/*
+* dijskstraSP function is the implementation of the shortest past algorithim the program uses to find
+* the shortest path between city structs within the graph. 
+* code is based of psudo code prived from handout as well as addition psudo code found online
+* agruments consist of the source city
+*/
+void GraphCities::dijkstraSP(int city) {
 	vector<int> dist(cities.size(), INT_MAX);
 	vector<int> unvisitedSet;
 	dist[city] = 0;
@@ -64,8 +85,4 @@ void GraphCities::dijkstraSP(GraphCities& graph, int city) {
 	}
 	this->route = dist;
 	this->source = city;
-}
-	
-City& GraphCities::getCity(int index) {
-	return cities[index];
 }

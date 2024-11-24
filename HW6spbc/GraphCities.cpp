@@ -38,9 +38,24 @@ void GraphCities::printDistances() const {
 			cout << "Not all cities are connected my road" << endl;
 		}
 		else {
-			cout << "Distance from " << cities[source].cityName << " to -> " << cities[i].cityName << " (" << cities[i].cityCode << ") : " << route[i] << endl;
+			cout << "Distance from " << cities[sourceCity].cityName << " to -> " << cities[i].cityName << " (" << cities[i].cityCode << ") : " << route[i] << endl;
 		}
 	}
+}
+void GraphCities::printDistanceFromTo(int destinationC) const {
+	cout << "From City: " << cities[sourceCity].cityName << ", population " << cities[sourceCity].Population << ", elevation " << cities[sourceCity].Elevation << endl;
+	cout << "To City: " << cities[destinationC].cityName << ", population " << cities[destinationC].Population << ", elevation " << cities[destinationC].Elevation << endl;
+	cout << "Shortest distance from " << cities[sourceCity].cityName << " to " << cities[destinationC].cityName << " is " << route[destinationC] << endl;
+	cout << "Through the route: ";
+	vector<int> travel;
+	for (int i = cities[destinationC].ID; i != -1; i = predecessorCity[i]) {
+		travel.push_back(i);
+	}
+	reverse(travel.begin(), travel.end());
+	for (int i = 0; i < travel.size(); i++) {
+		cout << "->" << cities[travel[i]].cityName;
+	}
+	
 }
 /*
 * dijskstraSP function is the implementation of the shortest past algorithim the program uses to find
@@ -48,10 +63,11 @@ void GraphCities::printDistances() const {
 * code is based of psudo code prived from handout as well as addition psudo code found online
 * agruments consist of the source city
 */
-void GraphCities::dijkstraSP(int city) {
+void GraphCities::dijkstraSP(int fromCity) {
 	vector<int> dist(cities.size(), INT_MAX);
+	vector<int>predecessor(cities.size(), -1);
 	vector<int> unvisitedSet;
-	dist[city] = 0;
+	dist[fromCity] = 0;
 	for (const auto& city : cities) {
 		unvisitedSet.push_back(city.ID);
 	}
@@ -79,10 +95,13 @@ void GraphCities::dijkstraSP(int city) {
 				int alt = dist[smallestID] + distance;
 				if (alt < dist[neighborID]) {
 					dist[neighborID] = alt;
+					predecessor[neighborID] = smallestID;
+
 				}
 			}
 		}
 	}
 	this->route = dist;
-	this->source = city;
+	this->sourceCity = fromCity;
+	this->predecessorCity = predecessor;
 }

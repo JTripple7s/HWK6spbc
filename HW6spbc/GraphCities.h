@@ -12,6 +12,7 @@ struct City {
 	string cityName;
 	int Population;
 	int Elevation;
+	int predecessorID = -1;
 
 	vector<pair<int, int>> neighbors;
 
@@ -28,12 +29,14 @@ class GraphCities {
 private:
 	vector<City> cities;
 	vector<int> route;
-	int source;
+	vector<int> predecessorCity;
+	int sourceCity;
 
 public:
 	void addCity(int id, const string& code, const string& name, int population, int elevation);
 	void addRoad(int fromCity, int toCity, int distance);
 	void displayGraph() const;
 	void printDistances() const;
-	void dijkstraSP(int city);
+	void printDistanceFromTo(int destinationC) const;
+	void dijkstraSP(int fromCity);
 };

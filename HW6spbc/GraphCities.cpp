@@ -61,7 +61,6 @@ void GraphCities::dijkstraSP(GraphCities& graph, int city) {
 				}
 			}
 		}
-
 	}
 	//return dist;
 	for (int i = 0; i < dist.size(); ++i) {

@@ -64,17 +64,6 @@ void GraphCities::dijkstraSP(GraphCities& graph, int city) {
 	}
 	route = dist;
 	source = city;
-	/*
-	for (int i = 0; i < dist.size(); ++i) {
-		if (dist[i] == INT_MAX) {
-			cout << "Not all cities are connected my road" << endl;
-		}
-		else {
-			cout << "Distance from " << cities[city].cityName << " to -> " << cities[i].cityName << " (" << cities[i].cityCode << ") : " << dist[i] << endl;
-		}
-	}
-	*/
-	
 }
 	
 City& GraphCities::getCity(int index) {

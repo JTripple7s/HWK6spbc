@@ -64,9 +64,12 @@ int main()
 	scanCityFile("city.txt", graph);
 	scanRoadsFile("roads.txt", graph);
 
-	//graph.displayGraph();
+	graph.displayGraph();
+	cout << "---------------------------------------------------------------" << endl;
 	graph.dijkstraSP(graph, 0);
 	graph.printDistances();
+
+	cout << "---------------------------------------------------------------" << endl;
 	cout << "we made it";
 
 	return 0;

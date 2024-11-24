@@ -62,8 +62,8 @@ void GraphCities::dijkstraSP(GraphCities& graph, int city) {
 			}
 		}
 	}
-	route = dist;
-	source = city;
+	this->route = dist;
+	this->source = city;
 }
 	
 City& GraphCities::getCity(int index) {

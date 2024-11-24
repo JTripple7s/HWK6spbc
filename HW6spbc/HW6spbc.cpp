@@ -42,27 +42,29 @@ void scanRoadsFile(const string& filename, GraphCities& graph) {
 	}
 	inputFile.close();
 }
-
-int main(int argc, char* argv[])
-{
-	string fromCity = argv[0];
-	string toCity = argv[0];
-	GraphCities graph;
+void headerOut() {
 	auto now = chrono::system_clock::now();
 	time_t currentTime = chrono::system_clock::to_time_t(now);
 	tm localTime;
-
-	if (localtime_s(&localTime, &currentTime) != 0) {
-			cerr << "No local time" << endl;
-			return 1;
-	}
+	localtime_s(&localTime, &currentTime);
 
 	cout << "Author: Joel Burlingame and Paul Sihavong" << endl;
 	cout << "Date:" << put_time(&localTime, "%m/%d/%Y") << endl;
 	cout << "Course: CS311 (Data structures and Algorithms)" << endl;
 	cout << "Description: Program to find the shortest route between cities" << endl;
 	cout << "---------------------------------------------------------------" << endl;
+}
 
+int main(int argc, char* argv[])
+{
+	//string s1 = argv[1];
+
+	GraphCities graph;
+
+	if (argv[1] != nullptr) {
+		cout << "this is a test\n";
+	}
+	headerOut();
 	scanCityFile("city.txt", graph);
 	scanRoadsFile("roads.txt", graph);
 
@@ -73,8 +75,10 @@ int main(int argc, char* argv[])
 
 	cout << "---------------------------------------------------------------" << endl;
 	cout << "we made it" << endl;
-	
-	cout << argc << "\n" << fromCity << " " << toCity << endl;
+	cout << argc << endl;
+	//cout << s1 << endl;
+	//printf("%s", argv[1]);
+
 
 	return 0;
 }

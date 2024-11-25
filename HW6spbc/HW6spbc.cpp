@@ -80,7 +80,7 @@ int main(int argc, char* argv[])
 	}
 	else {
 		headerOut();
-		//graph.displayGraph();
+		graph.displayGraph();
 		//cout << "---------------------------------------------------------------" << endl;
 		//graph.printDistances();
 		//cout << "---------------------------------------------------------------" << endl;

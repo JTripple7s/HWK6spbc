@@ -83,18 +83,17 @@ int main(int argc, char* argv[])
 		headerOut();
 		//graph.displayGraph();
 		//cout << "---------------------------------------------------------------" << endl;
+		//graph.printDistances();
+		//cout << "---------------------------------------------------------------" << endl;
 		graph.dijkstraSP("AN");
 		graph.printDistanceFromTo("BK");
-		//graph.printDistances();
-
+		
 		//cout << "---------------------------------------------------------------" << endl;
 		/*
 		* exe will always have at least one argument passed through being the exe itself
 		* multiple agrs can be passed and stored into argv array
 		*/
 		//cout << "number of arguments passed with executeble: " << argc << endl;	
-		//cout << "test1";
-		//cout << s1 << endl;
 		cout << "\n";
 	}
 	return 0;

@@ -79,7 +79,7 @@ void GraphCities::printDistanceFromTo(string destinationC) const {
 /*
 * dijskstraSP function is the implementation of the shortest past algorithim the program uses to find
 * the shortest path between city structs within the graph. 
-* code is based off psudo code privided from handout as well as addition psudo code from intro to algorithms CLRS.
+* code is based off psudo code provided from handout as well as addition psudo code from intro to algorithms CLRS.
 * agruments consist of the source city.
 */
 void GraphCities::dijkstraSP(const string& fromCity) {

@@ -74,7 +74,6 @@ int main(int argc, char* argv[])
 	* sent in if they exist within the graph
 	*/
 	if (argv[1] != nullptr) {
-		cout << "this is a test\n";
 		headerOut();
 		graph.dijkstraSP(argv[1]);
 		graph.printDistanceFromTo(argv[2]);
